@@ -17,10 +17,15 @@
         <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Singleton/BaseSingleton.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Singleton/BaseSingleton.cpp" />
+        <option value="$PROJECT_DIR$/../SpaceWar/Source/SpaceWar/DataAssets/SpecialObjectDataAsset.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" />
       </list>
     </option>
   </component>
@@ -262,7 +267,7 @@
       <workItem from="1681589314941" duration="415000" />
       <workItem from="1681590107457" duration="614000" />
       <workItem from="1681591286714" duration="6465000" />
-      <workItem from="1681632883673" duration="313000" />
+      <workItem from="1681632883673" duration="8792000" />
     </task>
     <servers />
   </component>
@@ -275,22 +280,22 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1681597840606">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1681645497498">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681597840606" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1681597840605">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1681645497498">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681597840605" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1681597840605">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1681645497498">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681597840605" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1681597840606">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1681645497498">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681597840606" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1681594991059">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
