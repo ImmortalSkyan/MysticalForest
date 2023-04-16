@@ -51918,6 +51918,7 @@
       <e p="UE4Game.Target.cs" t="Include" />
     </e>
     <e p="H:\UnrealEngineSSD\Projects\MysticalForest" t="IncludeFlat">
+      <e p=".gitignore" t="Include" />
       <e p="Config" t="Include">
         <e p="DefaultEditor.ini" t="Include" />
         <e p="DefaultEditorPerProjectUserSettings.ini" t="Include" />
@@ -51948,6 +51949,7 @@
             <e p="Actors" t="Include">
               <e p="Weapons" t="Include">
                 <e p="BaseWeaponActor.cpp" t="Include" />
+                <e p="RangeWeaponActor.cpp" t="Include" />
               </e>
             </e>
             <e p="DataAssets" t="Include">
@@ -51960,11 +51962,15 @@
                 </e>
               </e>
             </e>
+            <e p="Singleton" t="Include">
+              <e p="BaseSingleton.cpp" t="Include" />
+            </e>
           </e>
           <e p="Public" t="Include">
             <e p="Actors" t="Include">
               <e p="Weapons" t="Include">
                 <e p="BaseWeaponActor.h" t="Include" />
+                <e p="RangeWeaponActor.h" t="Include" />
               </e>
             </e>
             <e p="DataAssets" t="Include">
@@ -51976,6 +51982,9 @@
                   <e p="WeaponManagerComponent.h" t="Include" />
                 </e>
               </e>
+            </e>
+            <e p="Singleton" t="Include">
+              <e p="BaseSingleton.h" t="Include" />
             </e>
           </e>
         </e>
