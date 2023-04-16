@@ -6,13 +6,17 @@
 #include "Engine/DataAsset.h"
 #include "WeaponDataAsset.generated.h"
 
+class ARangeWeaponActor;
+
+DECLARE_DYNAMIC_DELEGATE_ThreeParams(FAsyncSpawnWeapon, bool, bResult, FStringAssetReference, LoadRef, ARangeWeaponActor*, WeaponActor);
+
 USTRUCT(BlueprintType)
 struct FWeaponDataBase
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
-	FName WeaponRowName;
+	FName WeaponName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
 	int32 BaseDamage;
@@ -41,6 +45,9 @@ struct FRangeWeaponData : public FWeaponDataBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
 	bool bCanAutoFire;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
+	TAssetSubclassOf<ARangeWeaponActor> WeaponClass;
 };
 
 UCLASS(Blueprintable)
@@ -48,8 +55,20 @@ class MYSTICALFOREST_API UWeaponDataAsset : public UDataAsset
 {
 	GENERATED_BODY()
 
+public:
+
+	FRangeWeaponData FindRangeWeaponData(const FName& RowName);
+	
+	UFUNCTION(BlueprintCallable, Category = "AsyncLoad|WeaponDataAsset", meta = (WorldContext = "WorldContextObject", DisplayName = "AsyncSpawnWeapon"))
+	static bool AsyncCreateWeapon(TAssetSubclassOf<ARangeWeaponActor> Class, UObject* WorldContext, FTransform SpawnTransform, class AController* Controller, const FAsyncSpawnWeapon& CallBack);
+
+private:
+	
+	/** Called when asset loading for actor spawn is finished */
+	static void OnAsyncSpawnActorComplete(UObject* WorldContextObject, FStringAssetReference Reference, FTransform SpawnTransform, class AController* Controller, FAsyncSpawnWeapon CallBack);
+
 private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	TArray<FRangeWeaponData> RangeWeaponData;
+	TMap<FName, FRangeWeaponData> RangeWeaponData;
 };
