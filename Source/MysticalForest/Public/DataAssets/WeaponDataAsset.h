@@ -71,12 +71,12 @@ public:
 	FRangeWeaponData FindRangeWeaponData(const FName& RowName);
 	
 	UFUNCTION(BlueprintCallable, Category = "AsyncLoad|WeaponDataAsset", meta = (WorldContext = "WorldContextObject", DisplayName = "AsyncSpawnWeapon"))
-	static bool AsyncCreateWeapon(TAssetSubclassOf<ARangeWeaponActor> Class, UObject* WorldContext, FTransform SpawnTransform, class AController* Controller, const FAsyncSpawnWeapon& CallBack);
+	bool AsyncCreateWeapon(const FName& RowName, UObject* WorldContext, FTransform SpawnTransform, class AController* Controller, const FAsyncSpawnWeapon& CallBack);
 
 private:
 	
 	/** Called when asset loading for actor spawn is finished */
-	static void OnAsyncSpawnActorComplete(UObject* WorldContextObject, FStringAssetReference Reference, FTransform SpawnTransform, class AController* Controller, FAsyncSpawnWeapon CallBack);
+	void OnAsyncSpawnActorComplete(FName RowName, UObject* WorldContextObject, FStringAssetReference Reference, FTransform SpawnTransform, class AController* Controller, FAsyncSpawnWeapon CallBack);
 
 private:
 
