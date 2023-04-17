@@ -19,7 +19,7 @@ AMysticalForestCharacter::AMysticalForestCharacter()
 	BaseLookUpRate = 45.f;
 
 	bReplicates = true;
-	NetUpdateFrequency = 40.f;
+	NetUpdateFrequency = 60.f;
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
@@ -66,17 +66,14 @@ void AMysticalForestCharacter::BeginPlay()
 	WeaponManagerComponent->OnCurrentWeaponChangedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnCurrentWeaponChangedEvent);
 
 	if(GetLocalRole() == ROLE_Authority)
-	{
-		WeaponManagerComponent->OnNewWeaponAddedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnNewWeaponAddedEvent);
-	}
+	WeaponManagerComponent->OnNewWeaponAddedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnNewWeaponAddedEvent);
 }
 
 void AMysticalForestCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if(GetLocalRole() == ROLE_Authority)
-	WeaponManagerComponent->CreateWeaponTest(Controller);
+	if(GetLocalRole() == ROLE_Authority) WeaponManagerComponent->CreateWeaponTest(Controller);
 }
 
 void AMysticalForestCharacter::TurnAtRate(float Rate)
@@ -132,5 +129,7 @@ void AMysticalForestCharacter::OnCurrentWeaponChangedEvent(ABaseWeaponActor* New
 
 void AMysticalForestCharacter::OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon)
 {
-	UKismetSystemLibrary::PrintString(this, FString(TEXT("OnNewWeaponAddedEvent")));
+	FString WeaponStr = UEnum::GetDisplayValueAsText(NewWeapon->GetWeaponType()).ToString();
+	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, "SKT_Test");
+	ForceNetUpdate();
 }
