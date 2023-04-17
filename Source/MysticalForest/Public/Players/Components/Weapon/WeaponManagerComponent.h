@@ -4,17 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "DataAssets/WeaponDataAsset.h"
 #include "WeaponManagerComponent.generated.h"
 
 class ABaseWeaponActor;
 
-UENUM(BlueprintType)
-enum class EWeaponType : uint8
-{
-	Unknown,
-	OneHandedWeapon,
-	TwoHandedWeapon
-};
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNewWeaponAdded, ABaseWeaponActor*, NewWeapon);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCurrentWeaponChanged, ABaseWeaponActor*, NewCurrentWeapon);
 
 USTRUCT(BlueprintType)
 struct FWeapons
@@ -35,15 +31,29 @@ class MYSTICALFOREST_API UWeaponManagerComponent : public UActorComponent
 
 private:
 
-	UFUNCTION(Server, Reliable)
-	void Server_AddWeaponToStorage(EWeaponType Type, ABaseWeaponActor* Weapon);
+	UFUNCTION()
+	void AddWeaponToStorage(ABaseWeaponActor* Weapon);
 
-	UFUNCTION(Server, Reliable)
-	void Server_RemoveWeaponFromStorage(EWeaponType Type, ABaseWeaponActor* Weapon);
+	UFUNCTION()
+	void RemoveWeaponFromStorage(ABaseWeaponActor* Weapon);
+
+	UFUNCTION()
+	void OnRep_CurrentWeapon();
+
+	void RemoveWeaponByKey(EWeaponType Key);
+	
+	UFUNCTION()
+    void OnCreateWeapon(bool bResult, FStringAssetReference LoadRef, ARangeWeaponActor* WeaponActor);
+	
+	ABaseWeaponActor* FindWeaponByKey(EWeaponType Key);
+	bool ContainsWeaponByKey(EWeaponType Key);
 
 public:	
 	// Sets default values for this component's properties
 	UWeaponManagerComponent();
+
+	//TEST
+	void CreateWeaponTest(AController* Controller);
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
@@ -55,9 +65,23 @@ protected:
 
 private:
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Weapons", meta=(AllowPrivateAccess = "true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UWeaponDataAsset* WeaponData;
+
+	UPROPERTY(ReplicatedUsing = "OnRep_CurrentWeapon", BlueprintReadOnly, Category = "Weapons", meta=(AllowPrivateAccess = "true"))
 	ABaseWeaponActor* CurrentWeapon;
 
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Weapons", meta=(AllowPrivateAccess = "true"))
-	TArray<FWeapons> Weapons;
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Weapons", meta=(AllowPrivateAccess = "true"))
+	TArray<ABaseWeaponActor*> Weapons;
+
+	UPROPERTY()
+	FAsyncSpawnWeapon AsyncSpawnWeaponDelegate;
+
+public:
+	
+	UPROPERTY()
+	FNewWeaponAdded OnNewWeaponAddedDelegate;
+
+	UPROPERTY()
+	FCurrentWeaponChanged OnCurrentWeaponChangedDelegate;
 };
