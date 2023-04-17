@@ -44,7 +44,8 @@ void UWeaponDataAsset::OnAsyncSpawnActorComplete(UObject* WorldContextObject, FS
         Param.Owner = Controller;
         Param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
         WeaponActor = WorldContextObject->GetWorld()->SpawnActor<ARangeWeaponActor>(Class, SpawnTransform, Param);
+        WeaponActor->FinishSpawning(SpawnTransform);
     }
-    CallBack.Execute(WeaponActor != nullptr, Reference, WeaponActor);
+    CallBack.ExecuteIfBound(WeaponActor != nullptr, Reference, WeaponActor);
 }
 

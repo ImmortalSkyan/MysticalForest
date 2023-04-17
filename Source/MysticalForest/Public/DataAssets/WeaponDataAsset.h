@@ -10,6 +10,14 @@ class ARangeWeaponActor;
 
 DECLARE_DYNAMIC_DELEGATE_ThreeParams(FAsyncSpawnWeapon, bool, bResult, FStringAssetReference, LoadRef, ARangeWeaponActor*, WeaponActor);
 
+UENUM(BlueprintType)
+enum class EWeaponType : uint8
+{
+	Unknown,
+    OneHandedWeapon,
+    TwoHandedWeapon
+};
+
 USTRUCT(BlueprintType)
 struct FWeaponDataBase
 {
@@ -17,6 +25,9 @@ struct FWeaponDataBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
 	FName WeaponName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
+	EWeaponType WeaponType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
 	int32 BaseDamage;
