@@ -10,8 +10,10 @@ FRangeWeaponData UWeaponDataAsset::FindRangeWeaponData(const FName& RowName)
     return RangeWeaponData.FindRef(RowName);
 }
 
-bool UWeaponDataAsset::AsyncCreateWeapon(TAssetSubclassOf<ARangeWeaponActor> Class, UObject* WorldContext, FTransform SpawnTransform, AController* Controller, const FAsyncSpawnWeapon& CallBack)
+bool UWeaponDataAsset::AsyncCreateWeapon(const FName& RowName, UObject* WorldContext, FTransform SpawnTransform, AController* Controller, const FAsyncSpawnWeapon& CallBack)
 {
+    auto const TempData = FindRangeWeaponData(RowName);
+    auto const Class = TempData.WeaponClass;
     if(Class.IsNull())
     {
         FString const InstigatorName = WorldContext ? *WorldContext->GetFullName() : TEXT("Unknown");
@@ -21,11 +23,11 @@ bool UWeaponDataAsset::AsyncCreateWeapon(TAssetSubclassOf<ARangeWeaponActor> Cla
 
     FStreamableManager& AssetLoader = UBaseSingleton::Get().AssetLoader;
     FSoftObjectPath Ref = Class.ToSoftObjectPath();
-    AssetLoader.RequestAsyncLoad(Ref, FStreamableDelegate::CreateStatic(&UWeaponDataAsset::OnAsyncSpawnActorComplete, WorldContext, Ref, SpawnTransform, Controller, CallBack));
+    AssetLoader.RequestAsyncLoad(Ref, FStreamableDelegate::CreateUObject(this, &UWeaponDataAsset::OnAsyncSpawnActorComplete, RowName, WorldContext, Ref, SpawnTransform, Controller, CallBack));
     return true;
 }
 
-void UWeaponDataAsset::OnAsyncSpawnActorComplete(UObject* WorldContextObject, FStringAssetReference Reference, FTransform SpawnTransform, AController* Controller, FAsyncSpawnWeapon CallBack)
+void UWeaponDataAsset::OnAsyncSpawnActorComplete(FName RowName, UObject* WorldContextObject, FStringAssetReference Reference, FTransform SpawnTransform, AController* Controller, FAsyncSpawnWeapon CallBack)
 {
     ARangeWeaponActor* WeaponActor = nullptr;
 
@@ -44,6 +46,7 @@ void UWeaponDataAsset::OnAsyncSpawnActorComplete(UObject* WorldContextObject, FS
         Param.Owner = Controller;
         Param.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
         WeaponActor = WorldContextObject->GetWorld()->SpawnActor<ARangeWeaponActor>(Class, SpawnTransform, Param);
+        WeaponActor->SetWeaponData(FindRangeWeaponData(RowName));
         WeaponActor->FinishSpawning(SpawnTransform);
     }
     CallBack.ExecuteIfBound(WeaponActor != nullptr, Reference, WeaponActor);
