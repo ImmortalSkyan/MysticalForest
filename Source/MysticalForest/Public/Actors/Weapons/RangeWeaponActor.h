@@ -17,9 +17,16 @@ class MYSTICALFOREST_API ARangeWeaponActor : public ABaseWeaponActor
 public:
     
     UFUNCTION(BlueprintPure)
-    virtual EWeaponType GetWeaponType() const override final { return RangeWeaponData.WeaponType; }
+    virtual EWeaponType GetWeaponType() const override { return RangeWeaponData.WeaponType; }
+
+    void SetWeaponData(const FRangeWeaponData& Data) { RangeWeaponData = Data; }
+
+protected:
+
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 private:
 
+    UPROPERTY(Replicated)
     FRangeWeaponData RangeWeaponData;
 };
