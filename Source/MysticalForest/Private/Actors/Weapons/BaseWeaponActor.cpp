@@ -11,13 +11,17 @@ ABaseWeaponActor::ABaseWeaponActor()
 
 	bReplicates = true;
 	NetUpdateFrequency = 30.f;
+
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+
+	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
+	WeaponMesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
 void ABaseWeaponActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 void ABaseWeaponActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
