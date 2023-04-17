@@ -12,18 +12,6 @@ class ABaseWeaponActor;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNewWeaponAdded, ABaseWeaponActor*, NewWeapon);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCurrentWeaponChanged, ABaseWeaponActor*, NewCurrentWeapon);
 
-USTRUCT(BlueprintType)
-struct FWeapons
-{
-	GENERATED_BODY()
-	
-	FWeapons() : Key(EWeaponType::Unknown), Value(nullptr) {}
-	FWeapons(EWeaponType Type, ABaseWeaponActor* Weapon) : Key(Type), Value(Weapon) {}
-	
-	EWeaponType Key;
-	ABaseWeaponActor* Value;
-};
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYSTICALFOREST_API UWeaponManagerComponent : public UActorComponent
 {
@@ -31,21 +19,49 @@ class MYSTICALFOREST_API UWeaponManagerComponent : public UActorComponent
 
 private:
 
+	/** Find Weapon by key
+	* @param
+	* @Weapon weapon for add
+	*/
 	UFUNCTION()
 	void AddWeaponToStorage(ABaseWeaponActor* Weapon);
 
+	/** Find Weapon by key
+	* @param
+	* @Weapon weapon for remove
+	*/
 	UFUNCTION()
 	void RemoveWeaponFromStorage(ABaseWeaponActor* Weapon);
 
 	UFUNCTION()
 	void OnRep_CurrentWeapon();
-
-	void RemoveWeaponByKey(EWeaponType Key);
 	
+	/** Find Weapon by key
+	* @param
+	* @Key Weapon type for remove
+	*/
+	UFUNCTION()
+	void RemoveWeaponByKey(EWeaponType Key);
+
+	/** Find Weapon by key
+	* @param
+	* @bResult true if weapon be created, false if be error
+	* @LoadRef String asset reference
+	* @WeaponActor Actor when be spawned
+	*/
 	UFUNCTION()
     void OnCreateWeapon(bool bResult, FStringAssetReference LoadRef, ARangeWeaponActor* WeaponActor);
-	
+
+	/** Find Weapon by key
+	 * @param
+	 * @Key Weapon type for find 
+	 */
 	ABaseWeaponActor* FindWeaponByKey(EWeaponType Key);
+
+	/** Find Weapon by key
+	* @param
+	* @Key Weapon type for contains 
+	*/
 	bool ContainsWeaponByKey(EWeaponType Key);
 
 public:	
@@ -61,27 +77,31 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	bool ReplicateSubobjects(UActorChannel* Channel, FOutBunch* Bunch, FReplicationFlags* RepFlags) override;
-
 private:
 
+	/** Weapon data asset */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UWeaponDataAsset* WeaponData;
 
+	/** curent weapon */
 	UPROPERTY(ReplicatedUsing = "OnRep_CurrentWeapon", BlueprintReadOnly, Category = "Weapons", meta=(AllowPrivateAccess = "true"))
 	ABaseWeaponActor* CurrentWeapon;
 
-	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Weapons", meta=(AllowPrivateAccess = "true"))
+	/** weapon array */
+	UPROPERTY(Replicated)
 	TArray<ABaseWeaponActor*> Weapons;
 
+	/** async spawn delegate */
 	UPROPERTY()
 	FAsyncSpawnWeapon AsyncSpawnWeaponDelegate;
 
 public:
-	
+
+	/** Delegate to add new weapon */
 	UPROPERTY()
 	FNewWeaponAdded OnNewWeaponAddedDelegate;
 
+	/** Delegate to current weapon */
 	UPROPERTY()
 	FCurrentWeaponChanged OnCurrentWeaponChangedDelegate;
 };
