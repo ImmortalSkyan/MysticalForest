@@ -4,6 +4,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Players/Components/Weapon/WeaponManagerComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -36,7 +37,9 @@ AMysticalForestCharacter::AMysticalForestCharacter()
 	FollowCamera->SetupAttachment(GetMesh(), "head");
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonMesh"));
+	WeaponManagerComponent = CreateDefaultSubobject<UWeaponManagerComponent>(TEXT("WeaponMangerComponent"));
+
+//	FirstPersonMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonMesh"));
 	//FirstPersonMesh->SetupAttachment(FollowCamera);
 }
 
@@ -60,10 +63,20 @@ void AMysticalForestCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if(IsLocallyControlled())
+	WeaponManagerComponent->OnCurrentWeaponChangedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnCurrentWeaponChangedEvent);
+
+	if(GetLocalRole() == ROLE_Authority)
 	{
-		//GetMesh()->DestroyComponent();
+		WeaponManagerComponent->OnNewWeaponAddedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnNewWeaponAddedEvent);
 	}
+}
+
+void AMysticalForestCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if(GetLocalRole() == ROLE_Authority)
+	WeaponManagerComponent->CreateWeaponTest(Controller);
 }
 
 void AMysticalForestCharacter::TurnAtRate(float Rate)
@@ -109,5 +122,15 @@ void AMysticalForestCharacter::MoveRight(float Value)
 
 USkeletalMeshComponent* AMysticalForestCharacter::GetLocalMesh() const
 {
-	return IsLocallyControlled() ? FirstPersonMesh : GetMesh();
+	return nullptr;
+}
+
+void AMysticalForestCharacter::OnCurrentWeaponChangedEvent(ABaseWeaponActor* NewWeapon)
+{
+	UKismetSystemLibrary::PrintString(this, FString(TEXT("OnCurrentWeaponChangedEvent")));
+}
+
+void AMysticalForestCharacter::OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon)
+{
+	UKismetSystemLibrary::PrintString(this, FString(TEXT("OnNewWeaponAddedEvent")));
 }

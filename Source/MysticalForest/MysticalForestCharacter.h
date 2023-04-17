@@ -3,13 +3,28 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "Actors/Weapons/BaseWeaponActor.h"
 #include "GameFramework/Character.h"
 #include "MysticalForestCharacter.generated.h"
+
+class UWeaponManagerComponent;
 
 UCLASS(config=Game)
 class AMysticalForestCharacter : public ACharacter
 {
 	GENERATED_BODY()
+
+private:
+
+	UFUNCTION()
+	void OnCurrentWeaponChangedEvent(ABaseWeaponActor* NewWeapon);
+
+	UFUNCTION()
+	void OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon);
+
+	UFUNCTION()
+	virtual void PossessedBy(AController* NewController) override;
 
 public:
 	AMysticalForestCharacter();
@@ -45,8 +60,11 @@ private:
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "WeaponManager", meta = (AllowPrivateAccess = "true"))
+	UWeaponManagerComponent* WeaponManagerComponent;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SkeletalMesh", meta = (AllowPrivateAccess = "true"))
-	USkeletalMeshComponent* FirstPersonMesh;
+//	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SkeletalMesh", meta = (AllowPrivateAccess = "true"))
+//	USkeletalMeshComponent* FirstPersonMesh;
 };
 
