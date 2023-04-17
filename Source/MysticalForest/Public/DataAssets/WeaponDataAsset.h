@@ -53,6 +53,9 @@ struct FRangeWeaponData : public FWeaponDataBase
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
 	float ReloadTime;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
+	float TimeForSelect;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "WeaponData")
 	bool bCanAutoFire;

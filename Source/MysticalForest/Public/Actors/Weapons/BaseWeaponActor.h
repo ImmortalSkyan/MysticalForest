@@ -18,7 +18,12 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Getter")
 	USkeletalMeshComponent* GetWeaponMesh() const { return WeaponMesh; }
+	
+	UFUNCTION(BlueprintPure)
 	virtual EWeaponType GetWeaponType() const { return EWeaponType::Unknown; }
+	
+	UFUNCTION(BlueprintPure)
+	virtual float GetSelectTime() const { return 0.f; }
 	
 
 protected:

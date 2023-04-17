@@ -3,7 +3,6 @@
 #include "MysticalForestCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "Components/InputComponent.h"
 #include "Players/Components/Weapon/WeaponManagerComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
@@ -50,6 +49,9 @@ void AMysticalForestCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+	PlayerInputComponent->BindAction("SelectOneHandWeapon", IE_Released, this, &AMysticalForestCharacter::StopJumping);
+	PlayerInputComponent->BindAction("SelectTwoHandWeapon", IE_Released, this, &AMysticalForestCharacter::StopJumping);
+
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMysticalForestCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMysticalForestCharacter::MoveRight);
 
@@ -57,6 +59,35 @@ void AMysticalForestCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAxis("TurnRate", this, &AMysticalForestCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("LookUpRate", this, &AMysticalForestCharacter::LookUpAtRate);
+
+	FInputActionHandlerSignature OneHandWeaponActionHandler;
+	OneHandWeaponActionHandler.BindUFunction(this, "OnSelectWeapon", EWeaponType::OneHandedWeapon);
+	BindActionBindings(OneHandWeaponActionHandler, "SelectOneHandWeapon");
+	
+	FInputActionHandlerSignature TwoHandWeaponActionHandler;
+	OneHandWeaponActionHandler.BindUFunction(this, "OnSelectWeapon", EWeaponType::TwoHandedWeapon);
+	BindActionBindings(OneHandWeaponActionHandler, "SelectTwoHandWeapon");
+}
+
+void AMysticalForestCharacter::BindActionBindings(const FInputActionHandlerSignature& ActionSignature, const FName& ActionName)
+{
+	FInputActionBinding ActionBinding(ActionName, IE_Released);
+	ActionBinding.ActionDelegate = ActionSignature;
+	InputComponent->AddActionBinding(ActionBinding);
+}
+
+void AMysticalForestCharacter::OnSelectWeapon(EWeaponType Type)
+{
+	/**
+	* if weapon with new type is valid and
+	* if new weapon type != current weapon type, start selected, else stop selected
+	*/
+	auto const TempWeapon = WeaponManagerComponent->FindWeaponByKey(Type);
+	if(TempWeapon && TempWeapon != WeaponManagerComponent->GetCurrentWeapon())
+	{
+		WeaponManagerComponent->Server_SelectWeapon(Type);
+		OnWeaponSelected.Broadcast(Type, WeaponManagerComponent->GetCurrentWeaponType());
+	}	
 }
 
 void AMysticalForestCharacter::BeginPlay()

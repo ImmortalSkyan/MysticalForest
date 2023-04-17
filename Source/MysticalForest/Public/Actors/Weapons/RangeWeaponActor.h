@@ -16,8 +16,8 @@ class MYSTICALFOREST_API ARangeWeaponActor : public ABaseWeaponActor
 
 public:
     
-    UFUNCTION(BlueprintPure)
-    virtual EWeaponType GetWeaponType() const override { return RangeWeaponData.WeaponType; }
+    virtual EWeaponType GetWeaponType() const override final { return RangeWeaponData.WeaponType; }
+    virtual float GetSelectTime() const override final { return RangeWeaponData.TimeForSelect; }    
 
     void SetWeaponData(const FRangeWeaponData& Data) { RangeWeaponData = Data; }
 

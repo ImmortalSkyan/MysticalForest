@@ -3,12 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
+#include "Components/InputComponent.h"
 #include "Actors/Weapons/BaseWeaponActor.h"
 #include "GameFramework/Character.h"
 #include "MysticalForestCharacter.generated.h"
 
 class UWeaponManagerComponent;
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FWeaponSelected, EWeaponType, NewWeaponType, EWeaponType, CurrentWeaponType);
 
 UCLASS(config=Game)
 class AMysticalForestCharacter : public ACharacter
@@ -16,6 +18,8 @@ class AMysticalForestCharacter : public ACharacter
 	GENERATED_BODY()
 
 private:
+
+	void BindActionBindings(const FInputActionHandlerSignature& ActionSignature, const FName& ActionName);
 
 	UFUNCTION()
 	void OnCurrentWeaponChangedEvent(ABaseWeaponActor* NewWeapon);
@@ -25,6 +29,10 @@ private:
 
 	UFUNCTION()
 	virtual void PossessedBy(AController* NewController) override;
+
+	/** Input. Call when player want select weapon */
+	UFUNCTION()
+	void OnSelectWeapon(EWeaponType Type);
 
 public:
 	AMysticalForestCharacter();
@@ -54,6 +62,10 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	/** bind when player select weapon */
+	UPROPERTY(BlueprintAssignable, Category = "Delegate")
+	FWeaponSelected OnWeaponSelected;
 
 private:
 	
