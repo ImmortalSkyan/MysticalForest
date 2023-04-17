@@ -33,11 +33,8 @@ void UWeaponManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimePropert
 void UWeaponManagerComponent::CreateWeaponTest(AController* Controller)
 {
 	if(GetOwnerRole() != ROLE_Authority) return;
-
-	auto const TempData = WeaponData->FindRangeWeaponData("WeaponTest");
-	if(TempData.WeaponClass.IsNull()) return;
 	
-	WeaponData->AsyncCreateWeapon(TempData.WeaponClass, GetWorld(), FTransform(FVector(0.f)), Controller, AsyncSpawnWeaponDelegate);
+	WeaponData->AsyncCreateWeapon("WeaponTest", GetWorld(), FTransform(FVector(0.f)), Controller, AsyncSpawnWeaponDelegate);
 }
 
 ABaseWeaponActor* UWeaponManagerComponent::FindWeaponByKey(EWeaponType Key)
@@ -73,22 +70,6 @@ void UWeaponManagerComponent::OnCreateWeapon(bool bResult, FStringAssetReference
 	}
 }
 
-bool UWeaponManagerComponent::ReplicateSubobjects(UActorChannel* Channel, FOutBunch* Bunch, FReplicationFlags* RepFlags)
-{
-	bool bRecorded = Super::ReplicateSubobjects(Channel, Bunch, RepFlags);
-
-	if((Channel->Connection->QueuedBits + Bunch->GetNumBits() + Channel->Connection->SendBuffer.GetNumBits()) >= 0)
-	{
-		return bRecorded;
-	}
-	TArray<UObject*> ReplicatedArray;
-	if(CurrentWeapon) ReplicatedArray.Add(CurrentWeapon);
-	for(auto const ByArray : Weapons) if(ByArray) ReplicatedArray.Add(ByArray);
-
-	bRecorded = Channel->ReplicateSubobjectList(ReplicatedArray, *Bunch, *RepFlags);
-	return bRecorded;
-}
-
 void UWeaponManagerComponent::AddWeaponToStorage(ABaseWeaponActor* Weapon)
 {
 	if(GetOwnerRole() == ROLE_Authority)
@@ -118,4 +99,3 @@ void UWeaponManagerComponent::OnRep_CurrentWeapon()
 {
 	OnCurrentWeaponChangedDelegate.Broadcast(CurrentWeapon);
 }
-
