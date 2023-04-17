@@ -13,5 +13,13 @@ UCLASS(Abstract)
 class MYSTICALFOREST_API ARangeWeaponActor : public ABaseWeaponActor
 {
 	GENERATED_BODY()
-	
+
+public:
+    
+    UFUNCTION(BlueprintPure)
+    virtual EWeaponType GetWeaponType() const override final { return RangeWeaponData.WeaponType; }
+
+private:
+
+    FRangeWeaponData RangeWeaponData;
 };
