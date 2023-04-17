@@ -6,18 +6,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c62b9dd-d602-4d42-97f0-286ffbd7d8c1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/Weapons/BP_WeaponTest.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/DataAssets/WeaponDataAsset.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/DataAssets/WeaponDataAsset.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/Weapons/BP_WeaponTest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/Weapons/BP_WeaponTest.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap_BuiltData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap_BuiltData.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/RangeWeaponActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/RangeWeaponActor.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" afterDir="false" />
@@ -37,14 +36,15 @@
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Singleton/BaseSingleton.cpp" />
         <option value="$PROJECT_DIR$/../SpaceWar/Source/SpaceWar/DataAssets/SpecialObjectDataAsset.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/RangeWeaponActor.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" />
       </list>
     </option>
   </component>
@@ -291,6 +291,7 @@
       <workItem from="1681591286714" duration="6465000" />
       <workItem from="1681632883673" duration="14525000" />
       <workItem from="1681663763680" duration="8101000" />
+      <workItem from="1681733328074" duration="7947000" />
     </task>
     <servers />
   </component>
@@ -307,22 +308,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="385" height="436" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1681695190039" />
-    <state width="1323" height="250" key="GridCell.Tab.0.bottom" timestamp="1681695658453">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1681741140231">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
-    <state width="1323" height="250" key="GridCell.Tab.0.center" timestamp="1681695658452">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681741140231" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1681741140230">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681695658452" />
-    <state width="1323" height="250" key="GridCell.Tab.0.left" timestamp="1681695658452">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681741140230" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1681741140230">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681695658452" />
-    <state width="1323" height="250" key="GridCell.Tab.0.right" timestamp="1681695658453">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681741140230" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1681741140230">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681741140230" />
     <state width="1323" height="250" key="GridCell.Tab.1.bottom" timestamp="1681695658453">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -387,16 +388,5 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1681689494179" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp</url>
-          <line>65</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
