@@ -130,6 +130,8 @@ void AMysticalForestCharacter::OnCurrentWeaponChangedEvent(ABaseWeaponActor* New
 void AMysticalForestCharacter::OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon)
 {
 	FString WeaponStr = UEnum::GetDisplayValueAsText(NewWeapon->GetWeaponType()).ToString();
-	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, "SKT_Test");
+	FString SocketStr = "SKT_" + WeaponStr + "Pos";
+	SocketStr.RemoveSpacesInline();
+	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, *SocketStr);
 	ForceNetUpdate();
 }
