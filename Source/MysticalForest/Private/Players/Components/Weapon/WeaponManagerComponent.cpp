@@ -2,7 +2,7 @@
 
 
 #include "Players/Components/Weapon/WeaponManagerComponent.h"
-#include "Actors/Weapons/BaseWeaponActor.h"
+#include "Actors/Weapons/RangeWeaponActor.h"
 #include "Engine/ActorChannel.h"
 #include "Net/UnrealNetwork.h"
 
@@ -14,12 +14,12 @@ UWeaponManagerComponent::UWeaponManagerComponent()
 	SetIsReplicatedByDefault(true);
 }
 
-
 // Called when the game starts
 void UWeaponManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if(GetOwnerRole() == ROLE_Authority) AsyncSpawnWeaponDelegate.BindUFunction(this, "OnCreateWeapon");
 }
 
 void UWeaponManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -30,31 +30,92 @@ void UWeaponManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimePropert
 	DOREPLIFETIME_CONDITION(UWeaponManagerComponent, Weapons, COND_OwnerOnly);
 }
 
+void UWeaponManagerComponent::CreateWeaponTest(AController* Controller)
+{
+	if(GetOwnerRole() != ROLE_Authority) return;
+
+	auto const TempData = WeaponData->FindRangeWeaponData("WeaponTest");
+	if(TempData.WeaponClass.IsNull()) return;
+	
+	WeaponData->AsyncCreateWeapon(TempData.WeaponClass, GetWorld(), FTransform(FVector(0.f)), Controller, AsyncSpawnWeaponDelegate);
+}
+
+ABaseWeaponActor* UWeaponManagerComponent::FindWeaponByKey(EWeaponType Key)
+{
+	for(const auto& ByArray : Weapons)
+	{
+		if(ByArray->GetWeaponType() == Key)
+		{
+			return ByArray;
+		}
+	}
+	return nullptr;
+}
+
+bool UWeaponManagerComponent::ContainsWeaponByKey(EWeaponType Key)
+{
+	bool Finder = Weapons.ContainsByPredicate([&](ABaseWeaponActor* Item) -> bool
+	{
+		return Item->GetWeaponType() == Key;
+	});
+	return Finder;
+}
+
+void UWeaponManagerComponent::OnCreateWeapon(bool bResult, FStringAssetReference LoadRef, ARangeWeaponActor* WeaponActor)
+{
+	if(bResult)
+	{
+		if(ContainsWeaponByKey(WeaponActor->GetWeaponType()))
+		{
+			RemoveWeaponByKey(WeaponActor->GetWeaponType());
+		}
+		AddWeaponToStorage(WeaponActor);
+	}
+}
+
 bool UWeaponManagerComponent::ReplicateSubobjects(UActorChannel* Channel, FOutBunch* Bunch, FReplicationFlags* RepFlags)
 {
 	bool bRecorded = Super::ReplicateSubobjects(Channel, Bunch, RepFlags);
 
-	if(((Channel->Connection->QueuedBits) + Bunch->GetNumBits() + Channel->Connection->SendBuffer.GetNumBits()) >= 0)
+	if((Channel->Connection->QueuedBits + Bunch->GetNumBits() + Channel->Connection->SendBuffer.GetNumBits()) >= 0)
 	{
 		return bRecorded;
 	}
 	TArray<UObject*> ReplicatedArray;
 	if(CurrentWeapon) ReplicatedArray.Add(CurrentWeapon);
-	for(auto const ByArray : Weapons) if(ByArray.Value) ReplicatedArray.Add(ByArray.Value);
+	for(auto const ByArray : Weapons) if(ByArray) ReplicatedArray.Add(ByArray);
 
 	bRecorded = Channel->ReplicateSubobjectList(ReplicatedArray, *Bunch, *RepFlags);
 	return bRecorded;
 }
 
-void UWeaponManagerComponent::Server_AddWeaponToStorage_Implementation(EWeaponType Type, ABaseWeaponActor* Weapon)
+void UWeaponManagerComponent::AddWeaponToStorage(ABaseWeaponActor* Weapon)
 {
-	Weapons.Add(FWeapons(Type, Weapon));
+	if(GetOwnerRole() == ROLE_Authority)
+	{
+		Weapons.Add(Weapon);
+		OnNewWeaponAddedDelegate.Broadcast(Weapon);
+	}
 }
 
-void UWeaponManagerComponent::Server_RemoveWeaponFromStorage_Implementation(EWeaponType Type, ABaseWeaponActor* Weapon)
+void UWeaponManagerComponent::RemoveWeaponFromStorage(ABaseWeaponActor* Weapon)
 {
-	Weapons.RemoveAll([&](FWeapons Item) -> bool
+	if(GetOwnerRole() == ROLE_Authority)
+	Weapons.Remove(Weapon);
+}
+
+void UWeaponManagerComponent::RemoveWeaponByKey(EWeaponType Key)
+{
+	if(GetOwnerRole() != ROLE_Authority) return;
+	
+	Weapons.RemoveAll([&](ABaseWeaponActor* Item) -> bool
 	{
-		return Item.Key == Type;
+		return Item->GetWeaponType() == Key;
 	});
 }
+
+void UWeaponManagerComponent::OnRep_CurrentWeapon()
+{
+	OnCurrentWeaponChangedDelegate.Broadcast(CurrentWeapon);
+}
+
