@@ -5,27 +5,46 @@
     <projectFile>Intermediate/ProjectFiles/UE4.vcxproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c62b9dd-d602-4d42-97f0-286ffbd7d8c1" name="Default Changelist" comment="" />
+    <list default="true" id="6c62b9dd-d602-4d42-97f0-286ffbd7d8c1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/Weapons/BP_WeaponTest.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Blueprints/ThirdPersonCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/DataAssets/WeaponDataAsset.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/DataAssets/WeaponDataAsset.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap_BuiltData.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/Maps/ThirdPersonExampleMap_BuiltData.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Singleton/BaseSingleton.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Singleton/BaseSingleton.cpp" />
         <option value="$PROJECT_DIR$/../SpaceWar/Source/SpaceWar/DataAssets/SpecialObjectDataAsset.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" />
       </list>
     </option>
   </component>
@@ -35,8 +54,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3498452" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.3003096" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="C++ Project.MysticalForest">
@@ -267,7 +289,8 @@
       <workItem from="1681589314941" duration="415000" />
       <workItem from="1681590107457" duration="614000" />
       <workItem from="1681591286714" duration="6465000" />
-      <workItem from="1681632883673" duration="8792000" />
+      <workItem from="1681632883673" duration="14525000" />
+      <workItem from="1681663763680" duration="8101000" />
     </task>
     <servers />
   </component>
@@ -280,29 +303,100 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1681645497498">
+    <state width="385" height="436" key="DebuggerActiveHint" timestamp="1681695190039">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1681645497498">
+    <state width="385" height="436" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1681695190039" />
+    <state width="1323" height="250" key="GridCell.Tab.0.bottom" timestamp="1681695658453">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1681645497498">
+    <state width="1323" height="250" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.0.center" timestamp="1681695658452">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1681645497498">
+    <state width="1323" height="250" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681695658452" />
+    <state width="1323" height="250" key="GridCell.Tab.0.left" timestamp="1681695658452">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681645497498" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1681594991059">
+    <state width="1323" height="250" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681695658452" />
+    <state width="1323" height="250" key="GridCell.Tab.0.right" timestamp="1681695658453">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1681594991059" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1681594183080">
+    <state width="1323" height="250" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.1.bottom" timestamp="1681695658453">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1681594183080" />
+    <state width="1323" height="250" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.1.center" timestamp="1681695658453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.1.left" timestamp="1681695658453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.1.right" timestamp="1681695658453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.2.bottom" timestamp="1681695658454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681695658454" />
+    <state width="1323" height="250" key="GridCell.Tab.2.center" timestamp="1681695658454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1681695658454" />
+    <state width="1323" height="250" key="GridCell.Tab.2.left" timestamp="1681695658453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1681695658453" />
+    <state width="1323" height="250" key="GridCell.Tab.2.right" timestamp="1681695658454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1681695658454" />
+    <state width="1323" height="250" key="GridCell.Tab.3.bottom" timestamp="1681695658455">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681695658455" />
+    <state width="1323" height="250" key="GridCell.Tab.3.center" timestamp="1681695658454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1681695658454" />
+    <state width="1323" height="250" key="GridCell.Tab.3.left" timestamp="1681695658454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1681695658454" />
+    <state width="1323" height="250" key="GridCell.Tab.3.right" timestamp="1681695658454">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="250" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1681695658454" />
+    <state width="691" height="369" key="XDebugger.FullValuePopup" timestamp="1681695188688">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="691" height="369" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1681695188688" />
+    <state x="43" y="0" width="1339" height="508" key="dock-window-1" timestamp="1681694618883">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="43" y="0" width="1339" height="508" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1681694618883" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1681652778601">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1681652778601" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1681689494179">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1681689494179" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp</url>
+          <line>65</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
