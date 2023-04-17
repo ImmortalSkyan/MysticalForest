@@ -4,10 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Actors/Weapons/BaseWeaponActor.h"
 #include "DataAssets/WeaponDataAsset.h"
 #include "WeaponManagerComponent.generated.h"
-
-class ABaseWeaponActor;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNewWeaponAdded, ABaseWeaponActor*, NewWeapon);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCurrentWeaponChanged, ABaseWeaponActor*, NewCurrentWeapon);
@@ -34,6 +33,12 @@ private:
 	void RemoveWeaponFromStorage(ABaseWeaponActor* Weapon);
 
 	UFUNCTION()
+	void HideCurrentWeapon(ABaseWeaponActor* NewWeapon);
+	
+	UFUNCTION()
+	void EquipNewWeapon(ABaseWeaponActor* NewWeapon);
+
+	UFUNCTION()
 	void OnRep_CurrentWeapon();
 	
 	/** Find Weapon by key
@@ -52,26 +57,42 @@ private:
 	UFUNCTION()
     void OnCreateWeapon(bool bResult, FStringAssetReference LoadRef, ARangeWeaponActor* WeaponActor);
 
+protected:
+
+	virtual void OnComponentCreated() override;
+
+public:	
+	// Sets default values for this component's properties
+	UWeaponManagerComponent();
+
+	UFUNCTION(Server, Reliable)
+	void Server_SelectWeapon(EWeaponType NewType);
+	
 	/** Find Weapon by key
-	 * @param
-	 * @Key Weapon type for find 
-	 */
+	* @param
+	* @Key Weapon type for find 
+	*/
+	UFUNCTION(BlueprintPure)
 	ABaseWeaponActor* FindWeaponByKey(EWeaponType Key);
 
 	/** Find Weapon by key
 	* @param
 	* @Key Weapon type for contains 
 	*/
+	UFUNCTION(BlueprintPure)
 	bool ContainsWeaponByKey(EWeaponType Key);
-
-public:	
-	// Sets default values for this component's properties
-	UWeaponManagerComponent();
 
 	//TEST
 	void CreateWeaponTest(AController* Controller);
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	/** return weapon type of current weapon. if current weapon is not valid return EWeaponType::Unknown */
+	UFUNCTION(BlueprintPure)
+	EWeaponType GetCurrentWeaponType() const { return CurrentWeapon ? CurrentWeapon->GetWeaponType() : EWeaponType::Unknown; }
+
+	UFUNCTION(BlueprintPure)
+	ABaseWeaponActor* GetCurrentWeapon() const { return CurrentWeapon; }
 
 protected:
 	// Called when the game starts
@@ -94,6 +115,9 @@ private:
 	/** async spawn delegate */
 	UPROPERTY()
 	FAsyncSpawnWeapon AsyncSpawnWeaponDelegate;
+
+	UPROPERTY()
+	FTimerHandle SelectWeaponHandle;
 
 public:
 

@@ -10,7 +10,6 @@
 UWeaponManagerComponent::UWeaponManagerComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-
 	SetIsReplicatedByDefault(true);
 }
 
@@ -18,8 +17,6 @@ UWeaponManagerComponent::UWeaponManagerComponent()
 void UWeaponManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if(GetOwnerRole() == ROLE_Authority) AsyncSpawnWeaponDelegate.BindUFunction(this, "OnCreateWeapon");
 }
 
 void UWeaponManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -28,6 +25,13 @@ void UWeaponManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimePropert
 
 	DOREPLIFETIME(UWeaponManagerComponent, CurrentWeapon);
 	DOREPLIFETIME_CONDITION(UWeaponManagerComponent, Weapons, COND_OwnerOnly);
+}
+
+void UWeaponManagerComponent::OnComponentCreated()
+{
+	Super::OnComponentCreated();
+
+	if(GetOwnerRole() == ROLE_Authority) AsyncSpawnWeaponDelegate.BindUFunction(this, "OnCreateWeapon");
 }
 
 void UWeaponManagerComponent::CreateWeaponTest(AController* Controller)
@@ -99,3 +103,35 @@ void UWeaponManagerComponent::OnRep_CurrentWeapon()
 {
 	OnCurrentWeaponChangedDelegate.Broadcast(CurrentWeapon);
 }
+
+void UWeaponManagerComponent::Server_SelectWeapon_Implementation(EWeaponType NewType)
+{
+	auto const TempWeapon = FindWeaponByKey(NewType);
+	if(TempWeapon && TempWeapon != CurrentWeapon)
+	{
+		bool const bWeaponValid = CurrentWeapon != nullptr;
+		
+		FTimerDelegate TimerDel;
+		FName const FunName = bWeaponValid ? "HideCurrentWeapon" : "EquipNewWeapon";
+		TimerDel.BindUFunction(this, FunName, TempWeapon);
+
+		float InRate = bWeaponValid ? CurrentWeapon->GetSelectTime() : TempWeapon->GetSelectTime();
+		GetWorld()->GetTimerManager().SetTimer(SelectWeaponHandle, TimerDel, TempWeapon->GetSelectTime(), false);
+	}
+}
+
+void UWeaponManagerComponent::HideCurrentWeapon(ABaseWeaponActor* NewWeapon)
+{
+	GetWorld()->GetTimerManager().ClearTimer(SelectWeaponHandle);
+
+	FTimerDelegate TimerDel;
+	TimerDel.BindUObject(this, &UWeaponManagerComponent::EquipNewWeapon, NewWeapon);
+	GetWorld()->GetTimerManager().SetTimer(SelectWeaponHandle, TimerDel, NewWeapon->GetSelectTime(), false);
+}
+
+void UWeaponManagerComponent::EquipNewWeapon(ABaseWeaponActor* NewWeapon)
+{
+	GetWorld()->GetTimerManager().ClearTimer(SelectWeaponHandle);
+	CurrentWeapon = NewWeapon;
+	OnRep_CurrentWeapon();
+}	
