@@ -4,18 +4,22 @@
     <projectFile>Intermediate/ProjectFiles/MysticalForest.vcxproj</projectFile>
     <projectFile>Intermediate/ProjectFiles/UE4.vcxproj</projectFile>
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="6c62b9dd-d602-4d42-97f0-286ffbd7d8c1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/riderModule.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/ThirdPersonCPP/DataAssets/WeaponDataAsset.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/ThirdPersonCPP/DataAssets/WeaponDataAsset.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,13 +38,13 @@
         <option value="$PROJECT_DIR$/../SpaceWar/Source/SpaceWar/DataAssets/SpecialObjectDataAsset.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/RangeWeaponActor.cpp" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/DataAssets/WeaponDataAsset.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/RangeWeaponActor.h" />
-        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/DataAssets/WeaponDataAsset.cpp" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" />
+        <option value="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" />
         <option value="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" />
       </list>
     </option>
@@ -50,14 +54,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3498452" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.3003096" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\skyan\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\skyan\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\skyan\\AppData\\Local\\Symbols\\src&quot;
+    ]
+  }
+}</component>
   <component name="RunManager" selected="C++ Project.MysticalForest">
     <configuration name="MysticalForest" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -289,6 +305,14 @@
       <workItem from="1681632883673" duration="14525000" />
       <workItem from="1681663763680" duration="8101000" />
       <workItem from="1681733328074" duration="23401000" />
+      <workItem from="1681795963428" duration="131000" />
+      <workItem from="1681804657292" duration="1020000" />
+      <workItem from="1681833391684" duration="8529000" />
+      <workItem from="1681844500275" duration="2474000" />
+      <workItem from="1682005107145" duration="3000" />
+      <workItem from="1682005449001" duration="1323000" />
+      <workItem from="1682008500547" duration="1456000" />
+      <workItem from="1682010311756" duration="7416000" />
     </task>
     <servers />
   </component>
@@ -300,90 +324,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state width="385" height="436" key="DebuggerActiveHint" timestamp="1681695190039">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="385" height="436" key="DebuggerActiveHint/0.0.1366.728@0.0.1366.728" timestamp="1681695190039" />
-    <state width="1323" height="250" key="GridCell.Tab.0.bottom" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.0.center" timestamp="1681763725080">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1681763725080" />
-    <state width="1323" height="250" key="GridCell.Tab.0.left" timestamp="1681763725080">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1681763725080" />
-    <state width="1323" height="250" key="GridCell.Tab.0.right" timestamp="1681763725080">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1681763725080" />
-    <state width="1323" height="250" key="GridCell.Tab.1.bottom" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.1.center" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.1.left" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.1.right" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.2.bottom" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.2.center" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.2.left" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.2.right" timestamp="1681763725081">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1681763725081" />
-    <state width="1323" height="250" key="GridCell.Tab.3.bottom" timestamp="1681763725082">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1681763725082" />
-    <state width="1323" height="250" key="GridCell.Tab.3.center" timestamp="1681763725082">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1681763725082" />
-    <state width="1323" height="250" key="GridCell.Tab.3.left" timestamp="1681763725082">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1681763725082" />
-    <state width="1323" height="250" key="GridCell.Tab.3.right" timestamp="1681763725082">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="1323" height="250" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1681763725082" />
-    <state width="691" height="369" key="XDebugger.FullValuePopup" timestamp="1681695188688">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state width="691" height="369" key="XDebugger.FullValuePopup/0.0.1366.728@0.0.1366.728" timestamp="1681695188688" />
-    <state x="43" y="0" width="1339" height="508" key="dock-window-1" timestamp="1681694618883">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="43" y="0" width="1339" height="508" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1681694618883" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1681652778601">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1681652778601" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1681743079723">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1681743079723" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
