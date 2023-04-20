@@ -8,6 +8,7 @@
 #include "GameFramework/Character.h"
 #include "MysticalForestCharacter.generated.h"
 
+enum class ESelectWeaponType : uint8;
 class UWeaponManagerComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FWeaponSelected, EWeaponType, NewWeaponType, EWeaponType, CurrentWeaponType);
@@ -25,6 +26,12 @@ private:
 	void OnCurrentWeaponChangedEvent(ABaseWeaponActor* NewWeapon);
 
 	UFUNCTION()
+	void OnHideWeapon();
+
+	UFUNCTION()
+	void OnMoveWeaponToSavePosEvent(ABaseWeaponActor* Weapon);
+
+	UFUNCTION()
 	void OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon);
 
 	UFUNCTION()
@@ -34,12 +41,15 @@ private:
 	UFUNCTION()
 	void OnSelectWeapon(EWeaponType Type);
 
+	UFUNCTION()
+	void OnSelectWeaponChangedEvent(ESelectWeaponType SelectType, ABaseWeaponActor* CurWeapon);
+
 public:
 	AMysticalForestCharacter();
 
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-
+	
 	USkeletalMeshComponent* GetLocalMesh() const;
 
 protected:

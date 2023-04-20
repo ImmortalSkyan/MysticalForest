@@ -48,9 +48,8 @@ void AMysticalForestCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
-	PlayerInputComponent->BindAction("SelectOneHandWeapon", IE_Released, this, &AMysticalForestCharacter::StopJumping);
-	PlayerInputComponent->BindAction("SelectTwoHandWeapon", IE_Released, this, &AMysticalForestCharacter::StopJumping);
+	
+	PlayerInputComponent->BindAction("HideWeapon", IE_Released, this, &AMysticalForestCharacter::OnHideWeapon);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMysticalForestCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMysticalForestCharacter::MoveRight);
@@ -78,16 +77,23 @@ void AMysticalForestCharacter::BindActionBindings(const FInputActionHandlerSigna
 
 void AMysticalForestCharacter::OnSelectWeapon(EWeaponType Type)
 {
-	/**
-	* if weapon with new type is valid and
-	* if new weapon type != current weapon type, start selected, else stop selected
-	*/
+	//Dont start select weapon logic if player selected weapon right now
+	if(WeaponManagerComponent->GetSelectType() != ESelectWeaponType::None) return;
+
 	auto const TempWeapon = WeaponManagerComponent->FindWeaponByKey(Type);
-	if(TempWeapon && TempWeapon != WeaponManagerComponent->GetCurrentWeapon())
+	if(!TempWeapon) return;
+	
+	if(WeaponManagerComponent->GetCurrentWeapon())
 	{
-		WeaponManagerComponent->Server_SelectWeapon(Type);
-		OnWeaponSelected.Broadcast(Type, WeaponManagerComponent->GetCurrentWeaponType());
-	}	
+		if(TempWeapon != WeaponManagerComponent->GetCurrentWeapon())
+		{
+			WeaponManagerComponent->SelectWeapon(Type);
+		}
+    }
+	else
+	{
+		WeaponManagerComponent->EquipWeapon(Type);
+	}
 }
 
 void AMysticalForestCharacter::BeginPlay()
@@ -97,7 +103,11 @@ void AMysticalForestCharacter::BeginPlay()
 	WeaponManagerComponent->OnCurrentWeaponChangedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnCurrentWeaponChangedEvent);
 
 	if(GetLocalRole() == ROLE_Authority)
-	WeaponManagerComponent->OnNewWeaponAddedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnNewWeaponAddedEvent);
+	{
+		WeaponManagerComponent->OnNewWeaponAddedDelegate.AddDynamic(this, &AMysticalForestCharacter::OnNewWeaponAddedEvent);
+		WeaponManagerComponent->OnMoveWeaponToSavePosDelegate.AddDynamic(this, &AMysticalForestCharacter::OnMoveWeaponToSavePosEvent);
+	}
+	
 }
 
 void AMysticalForestCharacter::PossessedBy(AController* NewController)
@@ -155,7 +165,17 @@ USkeletalMeshComponent* AMysticalForestCharacter::GetLocalMesh() const
 
 void AMysticalForestCharacter::OnCurrentWeaponChangedEvent(ABaseWeaponActor* NewWeapon)
 {
-	UKismetSystemLibrary::PrintString(this, FString(TEXT("OnCurrentWeaponChangedEvent")));
+	if(NewWeapon)
+	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, "SKT_RightWeaponPos");
+}
+
+void AMysticalForestCharacter::OnMoveWeaponToSavePosEvent(ABaseWeaponActor* Weapon)
+{
+	FString WeaponStr = UEnum::GetDisplayValueAsText(Weapon->GetWeaponType()).ToString();
+	FString SocketStr = "SKT_" + WeaponStr + "Pos";
+	SocketStr.RemoveSpacesInline();
+	Weapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, *SocketStr);
+	ForceNetUpdate();
 }
 
 void AMysticalForestCharacter::OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon)
@@ -165,4 +185,14 @@ void AMysticalForestCharacter::OnNewWeaponAddedEvent(ABaseWeaponActor* NewWeapon
 	SocketStr.RemoveSpacesInline();
 	NewWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, *SocketStr);
 	ForceNetUpdate();
+}
+
+void AMysticalForestCharacter::OnHideWeapon()
+{
+	WeaponManagerComponent->HideWeapon();
+}
+
+void AMysticalForestCharacter::OnSelectWeaponChangedEvent(ESelectWeaponType SelectType, ABaseWeaponActor* CurWeapon)
+{
+	
 }
