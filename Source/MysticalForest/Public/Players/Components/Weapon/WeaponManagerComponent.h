@@ -8,8 +8,19 @@
 #include "DataAssets/WeaponDataAsset.h"
 #include "WeaponManagerComponent.generated.h"
 
+UENUM(BlueprintType)
+enum class ESelectWeaponType : uint8
+{
+	None,
+	Equip,
+	Hide,
+	Select
+};
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FNewWeaponAdded, ABaseWeaponActor*, NewWeapon);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FCurrentWeaponChanged, ABaseWeaponActor*, NewCurrentWeapon);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMoveWeaponToSavePos, ABaseWeaponActor*, Weapon); // only server
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FSelectWeaponDelegate, ESelectWeaponType, Type, ABaseWeaponActor*, CurWeapon);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MYSTICALFOREST_API UWeaponManagerComponent : public UActorComponent
@@ -17,6 +28,9 @@ class MYSTICALFOREST_API UWeaponManagerComponent : public UActorComponent
 	GENERATED_BODY()
 
 private:
+	
+	UFUNCTION()
+	void OnRep_SelectWeaponType();
 
 	/** Find Weapon by key
 	* @param
@@ -32,11 +46,12 @@ private:
 	UFUNCTION()
 	void RemoveWeaponFromStorage(ABaseWeaponActor* Weapon);
 
+	/** hide current weapon for hide on new weapon */
 	UFUNCTION()
-	void HideCurrentWeapon(ABaseWeaponActor* NewWeapon);
+	void HideWeaponForSelect(ABaseWeaponActor* NewWeapon);
 	
 	UFUNCTION()
-	void EquipNewWeapon(ABaseWeaponActor* NewWeapon);
+	void EquipWeaponBeforeSelect(ABaseWeaponActor* NewWeapon);
 
 	UFUNCTION()
 	void OnRep_CurrentWeapon();
@@ -56,6 +71,21 @@ private:
 	*/
 	UFUNCTION()
     void OnCreateWeapon(bool bResult, FStringAssetReference LoadRef, ARangeWeaponActor* WeaponActor);
+    
+	UFUNCTION(Server, Reliable)
+	void Server_SelectWeapon(EWeaponType NewType);
+
+	UFUNCTION(Server, Reliable)
+	void Server_HideWeapon();
+
+	UFUNCTION()
+    void HideWeaponFinish();
+	
+	UFUNCTION(Server, Reliable)
+	void Server_EquipWeapon(EWeaponType NewType);
+
+	UFUNCTION()
+	void EquipWeaponFinish();
 
 protected:
 
@@ -65,8 +95,13 @@ public:
 	// Sets default values for this component's properties
 	UWeaponManagerComponent();
 
-	UFUNCTION(Server, Reliable)
-	void Server_SelectWeapon(EWeaponType NewType);
+	void SelectWeapon(EWeaponType NewType);
+	void EquipWeapon(EWeaponType Type);
+	void HideWeapon();
+	
+	UFUNCTION(BlueprintPure)
+	ESelectWeaponType GetSelectType() const { return SelectWeaponType; }
+
 	
 	/** Find Weapon by key
 	* @param
@@ -111,6 +146,9 @@ private:
 	/** weapon array */
 	UPROPERTY(Replicated)
 	TArray<ABaseWeaponActor*> Weapons;
+	
+	UPROPERTY(ReplicatedUsing = OnRep_SelectWeaponType)
+	ESelectWeaponType SelectWeaponType;
 
 	/** async spawn delegate */
 	UPROPERTY()
@@ -122,10 +160,16 @@ private:
 public:
 
 	/** Delegate to add new weapon */
-	UPROPERTY()
+	UPROPERTY(BlueprintAssignable)
 	FNewWeaponAdded OnNewWeaponAddedDelegate;
 
-	/** Delegate to current weapon */
 	UPROPERTY()
+	FMoveWeaponToSavePos OnMoveWeaponToSavePosDelegate;
+
+	/** Delegate to current weapon */
+	UPROPERTY(BlueprintAssignable)
 	FCurrentWeaponChanged OnCurrentWeaponChangedDelegate;
+
+	UPROPERTY(BlueprintAssignable)
+	FSelectWeaponDelegate OnSelectWeaponDelegate;
 };

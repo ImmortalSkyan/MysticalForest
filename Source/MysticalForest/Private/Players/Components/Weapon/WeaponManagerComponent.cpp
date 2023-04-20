@@ -24,7 +24,8 @@ void UWeaponManagerComponent::GetLifetimeReplicatedProps(TArray<FLifetimePropert
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(UWeaponManagerComponent, CurrentWeapon);
-	DOREPLIFETIME_CONDITION(UWeaponManagerComponent, Weapons, COND_OwnerOnly);
+	DOREPLIFETIME_CONDITION(UWeaponManagerComponent, Weapons, COND_OwnerOnly)
+	DOREPLIFETIME(UWeaponManagerComponent, SelectWeaponType);
 }
 
 void UWeaponManagerComponent::OnComponentCreated()
@@ -104,34 +105,125 @@ void UWeaponManagerComponent::OnRep_CurrentWeapon()
 	OnCurrentWeaponChangedDelegate.Broadcast(CurrentWeapon);
 }
 
+void UWeaponManagerComponent::OnRep_SelectWeaponType()
+{
+	OnSelectWeaponDelegate.Broadcast(SelectWeaponType, CurrentWeapon);
+}
+
+void UWeaponManagerComponent::SelectWeapon(EWeaponType NewType)
+{
+	Server_SelectWeapon(NewType);
+	SelectWeaponType = ESelectWeaponType::Select;
+	if(GetNetMode() != NM_ListenServer) OnSelectWeaponDelegate.Broadcast(SelectWeaponType, CurrentWeapon);
+}
+
 void UWeaponManagerComponent::Server_SelectWeapon_Implementation(EWeaponType NewType)
 {
+	//Dont start select weapon logic if player selected weapon right now
+	if(SelectWeaponType != ESelectWeaponType::None) return;
+	
 	auto const TempWeapon = FindWeaponByKey(NewType);
 	if(TempWeapon && TempWeapon != CurrentWeapon)
 	{
-		bool const bWeaponValid = CurrentWeapon != nullptr;
+		SelectWeaponType = ESelectWeaponType::Select;
+		OnRep_SelectWeaponType();
+			
+		FName const FunName = "HideWeaponForSelect";
+		float InRate = CurrentWeapon->GetSelectTime();
 		
 		FTimerDelegate TimerDel;
-		FName const FunName = bWeaponValid ? "HideCurrentWeapon" : "EquipNewWeapon";
 		TimerDel.BindUFunction(this, FunName, TempWeapon);
-
-		float InRate = bWeaponValid ? CurrentWeapon->GetSelectTime() : TempWeapon->GetSelectTime();
 		GetWorld()->GetTimerManager().SetTimer(SelectWeaponHandle, TimerDel, TempWeapon->GetSelectTime(), false);
 	}
 }
 
-void UWeaponManagerComponent::HideCurrentWeapon(ABaseWeaponActor* NewWeapon)
+void UWeaponManagerComponent::HideWeaponForSelect(ABaseWeaponActor* NewWeapon)
 {
 	GetWorld()->GetTimerManager().ClearTimer(SelectWeaponHandle);
 
+	//need for detach weapon from right arm and attach to safe position
+	OnMoveWeaponToSavePosDelegate.Broadcast(CurrentWeapon);
+	
+	CurrentWeapon = NewWeapon;
+	OnRep_CurrentWeapon();
+	
 	FTimerDelegate TimerDel;
-	TimerDel.BindUObject(this, &UWeaponManagerComponent::EquipNewWeapon, NewWeapon);
+	TimerDel.BindUObject(this, &UWeaponManagerComponent::EquipWeaponBeforeSelect, NewWeapon);
 	GetWorld()->GetTimerManager().SetTimer(SelectWeaponHandle, TimerDel, NewWeapon->GetSelectTime(), false);
 }
 
-void UWeaponManagerComponent::EquipNewWeapon(ABaseWeaponActor* NewWeapon)
+void UWeaponManagerComponent::EquipWeaponBeforeSelect(ABaseWeaponActor* NewWeapon)
 {
 	GetWorld()->GetTimerManager().ClearTimer(SelectWeaponHandle);
-	CurrentWeapon = NewWeapon;
+
+	SelectWeaponType = ESelectWeaponType::None;
+	OnRep_SelectWeaponType();
+}
+
+void UWeaponManagerComponent::HideWeapon()
+{
+	if(CurrentWeapon && SelectWeaponType == ESelectWeaponType::None)
+	{
+		Server_HideWeapon();
+	}
+}
+
+void UWeaponManagerComponent::Server_HideWeapon_Implementation()
+{
+	if(CurrentWeapon && SelectWeaponType == ESelectWeaponType::None)
+	{
+		SelectWeaponType = ESelectWeaponType::Hide;
+		OnRep_SelectWeaponType();
+
+		GetWorld()->GetTimerManager().SetTimer(SelectWeaponHandle, this, &UWeaponManagerComponent::HideWeaponFinish, CurrentWeapon->GetSelectTime(), false);
+	}
+}
+
+void UWeaponManagerComponent::HideWeaponFinish()
+{
+	GetWorld()->GetTimerManager().ClearTimer(SelectWeaponHandle);
+
+	//need for detach weapon from right arm and attach to safe position
+	OnMoveWeaponToSavePosDelegate.Broadcast(CurrentWeapon);
+	
+	CurrentWeapon = nullptr;
 	OnRep_CurrentWeapon();
-}	
+
+	SelectWeaponType = ESelectWeaponType::None;
+}
+
+void UWeaponManagerComponent::EquipWeapon(EWeaponType Type)
+{
+	Server_EquipWeapon(Type);
+	SelectWeaponType = ESelectWeaponType::Equip;
+
+	if(GetNetMode() != NM_ListenServer) OnSelectWeaponDelegate.Broadcast(SelectWeaponType, 	FindWeaponByKey(Type));
+}
+
+void UWeaponManagerComponent::Server_EquipWeapon_Implementation(EWeaponType Type)
+{
+	if(SelectWeaponType != ESelectWeaponType::None) return;
+	
+	auto const TempWeapon = FindWeaponByKey(Type);
+	if(TempWeapon)
+	{
+		CurrentWeapon = TempWeapon;
+		OnRep_CurrentWeapon();
+		
+		SelectWeaponType = ESelectWeaponType::Equip;
+		OnRep_SelectWeaponType();
+
+		GetWorld()->GetTimerManager().SetTimer(SelectWeaponHandle, this, &UWeaponManagerComponent::EquipWeaponFinish, CurrentWeapon->GetSelectTime(), false);
+		return;
+	}
+	SelectWeaponType = ESelectWeaponType::None;
+	OnRep_SelectWeaponType();
+}
+
+void UWeaponManagerComponent::EquipWeaponFinish()
+{
+	GetWorld()->GetTimerManager().ClearTimer(SelectWeaponHandle);
+	
+	SelectWeaponType = ESelectWeaponType::None;
+	OnRep_SelectWeaponType();
+}
