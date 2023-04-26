@@ -7,6 +7,8 @@
 #include "DataAssets/WeaponDataAsset.h"
 #include "BaseWeaponActor.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FWeaponUsed, bool, NewState);
+
 UCLASS(Abstract)
 class MYSTICALFOREST_API ABaseWeaponActor : public AActor
 {
@@ -31,7 +33,26 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
+	virtual bool UseWeapon();
+	virtual bool IsAbleToUseWeapon();
+	
+	virtual void StopUseWeapon();
+	virtual void StopRateDelay();
 
+	UFUNCTION()
+	virtual void OnRep_WeaponUsed();
+
+public:
+
+	UPROPERTY(BlueprintAssignable)
+	FWeaponUsed OnWeaponUsedDelegate;
+
+protected:
+
+	UPROPERTY(ReplicatedUsing = OnRep_WeaponUsed)
+	bool bWeaponUsed;
+	
 private:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "WeaponMesh", meta = (AllowPrivateAccess = "true"))

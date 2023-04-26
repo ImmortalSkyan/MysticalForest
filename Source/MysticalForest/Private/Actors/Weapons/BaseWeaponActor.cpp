@@ -2,6 +2,7 @@
 
 
 #include "Actors/Weapons/BaseWeaponActor.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 ABaseWeaponActor::ABaseWeaponActor()
@@ -28,5 +29,31 @@ void ABaseWeaponActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
+	DOREPLIFETIME_CONDITION(ABaseWeaponActor, bWeaponUsed, COND_SkipOwner);
+}
+
+void ABaseWeaponActor::OnRep_WeaponUsed()
+{
+	OnWeaponUsedDelegate.Broadcast(bWeaponUsed);
+}
+
+bool ABaseWeaponActor::UseWeapon()
+{
 	
 }
+
+void ABaseWeaponActor::StopUseWeapon()
+{
+	
+}
+
+void ABaseWeaponActor::StopRateDelay()
+{
+	
+}
+
+bool ABaseWeaponActor::IsAbleToUseWeapon()
+{
+	
+}
+

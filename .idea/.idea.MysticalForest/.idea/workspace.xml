@@ -9,18 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c62b9dd-d602-4d42-97f0-286ffbd7d8c1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/contentModel.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MysticalForest/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MysticalForest/riderModule.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/SK_Mannequin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Mannequin/Character/Mesh/UE4_Mannequin_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/MysticalForestCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Players/Components/Weapon/WeaponManagerComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Players/Components/Weapon/WeaponManagerComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Private/Actors/Weapons/BaseWeaponActor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/MysticalForest/Public/Actors/Weapons/BaseWeaponActor.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,6 +304,9 @@
       <workItem from="1682005449001" duration="1323000" />
       <workItem from="1682008500547" duration="1456000" />
       <workItem from="1682010311756" duration="7416000" />
+      <workItem from="1682276335144" duration="766000" />
+      <workItem from="1682535480012" duration="13000" />
+      <workItem from="1682539473392" duration="924000" />
     </task>
     <servers />
   </component>
