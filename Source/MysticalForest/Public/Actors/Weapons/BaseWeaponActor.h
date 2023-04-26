@@ -18,15 +18,29 @@ public:
 	// Sets default values for this actor's properties
 	ABaseWeaponActor();
 
+	UFUNCTION()
+	void StartUseWeapon();
+
+	UFUNCTION()
+	void FinishUseWeapon();
+
 	UFUNCTION(BlueprintPure, Category = "Getter")
 	USkeletalMeshComponent* GetWeaponMesh() const { return WeaponMesh; }
 	
 	UFUNCTION(BlueprintPure)
 	virtual EWeaponType GetWeaponType() const { return EWeaponType::Unknown; }
+
+	UFUNCTION(BlueprintPure, Category = "Getter")
+	virtual bool GetCanAutoFire() const { return false; }
 	
 	UFUNCTION(BlueprintPure)
 	virtual float GetSelectTime() const { return 0.f; }
-	
+
+	UFUNCTION(BlueprintPure)
+	virtual float GetSpeedOfUse() const { return 0.f; }
+
+	UFUNCTION(BlueprintPure, Category = "Getter")
+	virtual bool GetWeaponUsed() const { return bWeaponUsed; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,6 +57,12 @@ protected:
 	UFUNCTION()
 	virtual void OnRep_WeaponUsed();
 
+	UFUNCTION(Server, Reliable)
+	void Server_StartUseWeapon();
+
+	UFUNCTION(Server, Reliable)
+	void Server_StopUseWeapon();
+
 public:
 
 	UPROPERTY(BlueprintAssignable)
@@ -52,6 +72,9 @@ protected:
 
 	UPROPERTY(ReplicatedUsing = OnRep_WeaponUsed)
 	bool bWeaponUsed;
+
+	UPROPERTY()
+	FTimerHandle UseWeaponHandle;
 	
 private:
 

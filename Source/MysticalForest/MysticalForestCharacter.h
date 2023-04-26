@@ -23,6 +23,12 @@ private:
 	void BindActionBindings(const FInputActionHandlerSignature& ActionSignature, const FName& ActionName);
 
 	UFUNCTION()
+	void StartUseWeapon();
+
+	UFUNCTION()
+	void StopUseWeapon();
+	
+	UFUNCTION()
 	void OnCurrentWeaponChangedEvent(ABaseWeaponActor* NewWeapon);
 
 	UFUNCTION()

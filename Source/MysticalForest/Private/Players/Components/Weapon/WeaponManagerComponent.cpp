@@ -112,15 +112,18 @@ void UWeaponManagerComponent::OnRep_SelectWeaponType()
 
 void UWeaponManagerComponent::SelectWeapon(EWeaponType NewType)
 {
-	Server_SelectWeapon(NewType);
-	SelectWeaponType = ESelectWeaponType::Select;
-	if(GetNetMode() != NM_ListenServer) OnSelectWeaponDelegate.Broadcast(SelectWeaponType, CurrentWeapon);
+	if(!CurrentWeapon->GetWeaponUsed())
+	{
+		Server_SelectWeapon(NewType);
+		SelectWeaponType = ESelectWeaponType::Select;
+		if(GetNetMode() != NM_ListenServer) OnSelectWeaponDelegate.Broadcast(SelectWeaponType, CurrentWeapon);
+	}
 }
 
 void UWeaponManagerComponent::Server_SelectWeapon_Implementation(EWeaponType NewType)
 {
 	//Dont start select weapon logic if player selected weapon right now
-	if(SelectWeaponType != ESelectWeaponType::None) return;
+	if(SelectWeaponType != ESelectWeaponType::None || CurrentWeapon->GetWeaponUsed()) return;
 	
 	auto const TempWeapon = FindWeaponByKey(NewType);
 	if(TempWeapon && TempWeapon != CurrentWeapon)
@@ -162,7 +165,7 @@ void UWeaponManagerComponent::EquipWeaponBeforeSelect(ABaseWeaponActor* NewWeapo
 
 void UWeaponManagerComponent::HideWeapon()
 {
-	if(CurrentWeapon && SelectWeaponType == ESelectWeaponType::None)
+	if(CurrentWeapon && SelectWeaponType == ESelectWeaponType::None && !CurrentWeapon->GetWeaponUsed())
 	{
 		Server_HideWeapon();
 	}
@@ -170,7 +173,7 @@ void UWeaponManagerComponent::HideWeapon()
 
 void UWeaponManagerComponent::Server_HideWeapon_Implementation()
 {
-	if(CurrentWeapon && SelectWeaponType == ESelectWeaponType::None)
+	if(CurrentWeapon && SelectWeaponType == ESelectWeaponType::None && !CurrentWeapon->GetWeaponUsed())
 	{
 		SelectWeaponType = ESelectWeaponType::Hide;
 		OnRep_SelectWeaponType();

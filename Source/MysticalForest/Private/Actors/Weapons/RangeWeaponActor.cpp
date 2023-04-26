@@ -10,3 +10,39 @@ void ARangeWeaponActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 
     DOREPLIFETIME(ARangeWeaponActor, RangeWeaponData);
 }
+
+bool ARangeWeaponActor::IsAbleToUseWeapon()
+{
+    return Super::IsAbleToUseWeapon();
+}
+
+bool ARangeWeaponActor::UseWeapon()
+{
+    if(Super::UseWeapon())
+    {
+        DropLineTrace();
+        return true;
+    }
+    StopUseWeapon();
+    return false;
+}
+
+void ARangeWeaponActor::StopRateDelay()
+{
+    Super::StopRateDelay();
+
+    if(GetCanAutoFire() && bWeaponUsed)
+    {
+        UseWeapon();
+    }
+}
+
+void ARangeWeaponActor::StopUseWeapon()
+{
+    Super::StopUseWeapon();
+}
+
+void ARangeWeaponActor::DropLineTrace()
+{
+    
+}

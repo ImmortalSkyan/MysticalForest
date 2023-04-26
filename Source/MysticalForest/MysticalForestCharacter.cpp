@@ -50,6 +50,9 @@ void AMysticalForestCharacter::SetupPlayerInputComponent(class UInputComponent* 
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	
 	PlayerInputComponent->BindAction("HideWeapon", IE_Released, this, &AMysticalForestCharacter::OnHideWeapon);
+	
+	PlayerInputComponent->BindAction("UseWeapon", IE_Pressed, this, &AMysticalForestCharacter::StartUseWeapon);
+	PlayerInputComponent->BindAction("UseWeapon", IE_Released, this, &AMysticalForestCharacter::StopUseWeapon);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMysticalForestCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMysticalForestCharacter::MoveRight);
@@ -196,3 +199,22 @@ void AMysticalForestCharacter::OnSelectWeaponChangedEvent(ESelectWeaponType Sele
 {
 	
 }
+
+void AMysticalForestCharacter::StartUseWeapon()
+{
+	auto const TempWeapon = WeaponManagerComponent->GetCurrentWeapon();
+	if(TempWeapon)
+	{
+		TempWeapon->StartUseWeapon();
+	}
+}
+
+void AMysticalForestCharacter::StopUseWeapon()
+{
+	auto const TempWeapon = WeaponManagerComponent->GetCurrentWeapon();
+	if(TempWeapon)
+	{
+		TempWeapon->FinishUseWeapon();
+	}
+}
+
